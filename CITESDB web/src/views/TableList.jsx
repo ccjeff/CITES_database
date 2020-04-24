@@ -21,10 +21,6 @@ import { Grid, Row, Col, Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 import { thArray, tdArray } from "variables/Variables.jsx";
 
-import { Menu, Dropdown, Icon, Tag, Popover, Button } from 'antd';
-import TagButton from './tag'
-require('./index.less')
-
 
 
 class TableList extends Component {
@@ -45,18 +41,7 @@ class TableList extends Component {
     event.preventDefault();
   }
   render() {
-    const menu = (
-      <Menu selectedKeys={this.state.selectedKeys} multiple={true} onSelect={this.handleButtonSelect} onDeselect={this.handleButtonDeSelect}>
-        {
-            this.state.selectList.map((item,index) => (
-              <Menu.Item value={item} key={item.id}>
-                 <a>{item.title}</a>
-              </Menu.Item>
-             ))
-        }
-      </Menu>
-    );
-
+  
     return (
       <div className="content">
         <form onSubmit={this.handleSubmit}>
@@ -72,16 +57,7 @@ class TableList extends Component {
         <input type="submit" value="submit" />
       </form>  
 
-      <div className="multi-select-box">
-                {
-                    this.state.tagList.map((item, index) => (
-                        <TagButton key={item.id} itemTitle={item.title} itemId={item.id} handleShow={this.handleShow}></TagButton>
-                    ))
-                }
-                <Popover overlayClassName='multi-select-popover' placement="bottomLeft" content={menu} trigger="click">
-                    <Button>BL</Button>
-                </Popover>
-      </div>
+      
 
         <Grid fluid>
           <Row>
