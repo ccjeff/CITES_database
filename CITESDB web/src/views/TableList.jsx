@@ -17,8 +17,19 @@
 */
 import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
+import { csv } from "d3-fetch";
+import {
+  FormGroup,
+  ControlLabel,
+  FormControl
+} from "react-bootstrap";
 
-import Card from "components/Card/Card.jsx";
+import { Card } from "components/Card/Card.jsx";
+import { FormInputs } from "components/FormInputs/FormInputs.jsx";
+import { UserCard } from "components/UserCard/UserCard.jsx";
+import Button from "components/CustomButton/CustomButton.jsx";
+
+import avatar from "assets/img/faces/face-3.jpg";
 import { thArray, tdArray } from "variables/Variables.jsx";
 
 
@@ -26,11 +37,18 @@ import { thArray, tdArray } from "variables/Variables.jsx";
 class TableList extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: 'coconut'};
+    this.state = {value: 'CN'};
 
+    this.handleButton = this.handleButton.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  handleButton = event => {
+    alert('should be changed with communication with server: ' + this.state.value);
+    console.log(event.target.value);
+    event.preventDefault();
+  };
 
   handleChange(event) {
     this.setState({value: event.target.value});
@@ -53,13 +71,56 @@ class TableList extends Component {
             <option value="tb">Taobao</option>
             <option value="fb">Facebook</option>
           </select>
+
         </label>
         <input type="submit" value="submit" />
       </form>  
 
       
-
+      <form onSubmit={this.handleButton}>
         <Grid fluid>
+        <Row>
+            <Col md={8}>
+              <Card
+                title="Search with these restrictions: "
+                content={
+                  <form>
+                    <FormInputs
+                      ncols={["col-md-5", "col-md-3", "col-md-4"]}
+                      properties={[
+                        {
+                          label: "Year",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "2020",
+                          defaultValue: "2020",
+                        },
+                        {
+                          label: "Creature Name",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "Elephant",
+                          defaultValue: "Elephant"
+                        },
+                        {
+                          label: "Country",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "CN",
+                          defaultValue: "CN"
+                        }
+                      ]}
+                    />
+                    
+                    <Button bsStyle="info" pullRight fill type="submit">
+                      Search
+                    </Button>
+                    <div className="clearfix" />
+                  </form>
+                }
+              />
+            </Col>
+          </Row>
           <Row>
             <Col md={12}>
               <Card
@@ -125,7 +186,7 @@ class TableList extends Component {
             </Col>
           </Row>
         </Grid>
-        
+        </form>
       </div>
     );
   }

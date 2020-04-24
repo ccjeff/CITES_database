@@ -21,6 +21,14 @@ import cx from "classnames";
 import PropTypes from "prop-types";
 
 class CustomButton extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    console.log("the button is clicked, later should be replaced with required function");
+  }
+
   render() {
     const { fill, simple, pullRight, round, block, ...rest } = this.props;
 
@@ -31,6 +39,7 @@ class CustomButton extends Component {
       "btn-block": block,
       "btn-round": round
     });
+    
 
     return <Button className={btnClasses} {...rest} />;
   }
