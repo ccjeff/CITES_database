@@ -491,6 +491,10 @@ const iconsArray = [
 // // // // For dashboard's charts
 // //
 //
+
+
+
+
 // Data for Pie Chart
 var dataPie = {
   labels: ["40%", "20%", "40%"],
