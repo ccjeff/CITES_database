@@ -1,5 +1,5 @@
 /*!
-
+cc
 =========================================================
 * Light Bootstrap Dashboard React - v1.3.0
 =========================================================
@@ -51,7 +51,6 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="content">
-        
         <div>
           <MapChart />
         </div>
