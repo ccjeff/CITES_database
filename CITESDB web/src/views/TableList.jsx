@@ -37,32 +37,48 @@ import { thArray, tdArray } from "variables/Variables.jsx";
 class TableList extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: 'CN'};
+    this.state = {
+      country: 'CN',
+      year: '2020',
+      creature: 'elephant',
+    };
 
     this.handleButton = this.handleButton.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChange1 = this.handleChange1.bind(this);
+    this.handleChange2 = this.handleChange2.bind(this);
+    this.handleChange3 = this.handleChange3.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleButton = event => {
-    console.log(this.props);
-    alert('should be changed with communication with server: ' + this.state.value);
+    // console.log(this.props);
+    // alert('should be changed with communication with server: ' + this.state.country + this.state.year + this.state.creature);
+    console.log(this.state);
     // const w=window.open('about:blank');
     // w.location.href="typography"
     // console.log(event.target.value);
     event.preventDefault();
   };
 
-  handleChange(event) {
+  handleChange1 = event => {
     console.log("on change");
-    console.log(event.target.value);
-    this.setState({value: event.target.value});
+    this.setState({ ["year"]: event.target.value });
+  }
+  handleChange2 = event => {
+    console.log("on change");
+    
+    this.setState({ ["creature"]: event.target.value });
+  }
+  handleChange3 = event => {
+    console.log('handle3');
+    this.setState({ ["country"]: event.target.value });
   }
 
   handleSubmit(event) {
     alert('Your favorite flavor is: ' + this.state.value);
     event.preventDefault();
   }
+  
   render() {
   
     return (
@@ -87,11 +103,12 @@ class TableList extends Component {
         <Row>
             <Col md={8}>
               <Card
-                title="Search with these restrictions: "
+                title="Search with year: "
                 content={
-                  <form onChange = {this.handleChange}>
+                  <form onChange = {this.handleChange1}>
                     <FormInputs
-                      ncols={["col-md-5", "col-md-3", "col-md-4"]}
+                      name = "formValue"
+                      ncols={["col-md-5"]}
                       properties={[
                         {
                           label: "Year",
@@ -99,14 +116,46 @@ class TableList extends Component {
                           bsClass: "form-control",
                           placeholder: "2020",
                           defaultValue: "2020",
-                        },
+                        }
+                      ]}
+                    />
+                    <div className="clearfix" />
+                  </form>
+                }
+              />
+              <Card
+                title="Search with creature name: "
+                content={
+                  <form onChange = {this.handleChange2}>
+                    <FormInputs
+                      name = "formValue"
+                      ncols={["col-md-5"]}
+                      properties={[
+                        
                         {
                           label: "Creature Name",
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Elephant",
                           defaultValue: "Elephant"
-                        },
+                        }
+                      ]}
+
+                    />
+                    
+
+                    <div className="clearfix" />
+                  </form>
+                }
+              />
+              <Card
+                title="Search with country: "
+                content={
+                  <form onChange = {this.handleChange3}>
+                    <FormInputs
+                      name = "formValue"
+                      ncols={["col-md-5"]}
+                      properties={[
                         {
                           label: "Country",
                           type: "text",
@@ -118,16 +167,18 @@ class TableList extends Component {
 
                     />
                     
-                    <Button bsStyle="info" pullRight fill type="submit">
-                      Search
-                    </Button>
+
                     <div className="clearfix" />
                   </form>
                 }
               />
+              
             </Col>
           </Row>
           
+          <Button bsStyle="info" pullRight fill type="submit">
+                Search
+          </Button>
         </Grid>
         </form>
       </div>
