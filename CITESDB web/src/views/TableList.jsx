@@ -15,6 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
 import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 import { csv } from "d3-fetch";
@@ -28,19 +29,23 @@ import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
-
+import { subscribeToTimer, sendToServer } from './socket';
 import avatar from "assets/img/faces/face-3.jpg";
 import { thArray, tdArray } from "variables/Variables.jsx";
-
 
 
 class TableList extends Component {
   constructor(props) {
     super(props);
+    subscribeToTimer((err, timestamp) => this.setState({ 
+      timestamp 
+    }));
+    
     this.state = {
       country: 'CN',
       year: '2020',
       creature: 'elephant',
+      timestamp : 'no time yet'
     };
 
     this.handleButton = this.handleButton.bind(this);
@@ -53,9 +58,14 @@ class TableList extends Component {
   handleButton = event => {
     // console.log(this.props);
     // alert('should be changed with communication with server: ' + this.state.country + this.state.year + this.state.creature);
-    console.log(this.state);
-    // const w=window.open('about:blank');
-    // w.location.href="typography"
+    console.log("aa");
+    console.log(JSON.stringify(this.state));
+    var returnVal = this.state;
+    sendToServer(this.state);
+    
+
+    const w=window.open('about:blank');
+    w.location.href="typography"
     // console.log(event.target.value);
     event.preventDefault();
   };
@@ -83,21 +93,10 @@ class TableList extends Component {
   
     return (
       <div className="content">
-        {/* <form onSubmit={this.handleSubmit}> */}
-        {/* <label>
-          Choose the country for query 
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="gg">Google</option>
-            <option value="rn">Runoob</option>
-            <option value="tb">Taobao</option>
-            <option value="fb">Facebook</option>
-          </select>
+        <p className="App-intro">
+        This is the timer value: {this.state.timestamp}
+        </p>
 
-        </label>
-        <input type="submit" value="submit" /> */}
-      {/* </form>   */}
-
-      
       <form onSubmit={this.handleButton}>
         <Grid fluid>
         <Row>
