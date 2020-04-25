@@ -16,7 +16,9 @@
 
 */
 import React, { Component } from "react";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col, Table } from "react-bootstrap";
+import { thArray, tdArray } from "variables/Variables.jsx";
+
 
 import Card from "components/Card/Card.jsx";
 
@@ -24,115 +26,67 @@ class Typography extends Component {
   render() {
     return (
       <div className="content">
-        <Grid fluid>
+        <Grid fulid>
           <Row>
             <Col md={12}>
               <Card
-                title="Light Bootstrap Table Heading"
-                category="Created using Roboto Font Family"
+                title="Striped Table with Hover"
+                category="Here is a subtitle for this table"
+                ctTableFullWidth
+                ctTableResponsive
                 content={
-                  <div>
-                    <div className="typo-line">
-                      <h1>
-                        <p className="category">Header 1</p>Light Bootstrap
-                        Table Heading{" "}
-                      </h1>
-                    </div>
+                  <Table striped hover>
+                    <thead>
+                      <tr>
+                        {thArray.map((prop, key) => {
+                          return <th key={key}>{prop}</th>;
+                        })}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {tdArray.map((prop, key) => {
+                        return (
+                          <tr key={key}>
+                            {prop.map((prop, key) => {
+                              return <td key={key}>{prop}</td>;
+                            })}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                }
+              />
+            </Col>
 
-                    <div className="typo-line">
-                      <h2>
-                        <p className="category">Header 2</p>Light Bootstrap
-                        Table Heading
-                      </h2>
-                    </div>
-                    <div className="typo-line">
-                      <h3>
-                        <p className="category">Header 3</p>Light Bootstrap
-                        Table Heading
-                      </h3>
-                    </div>
-                    <div className="typo-line">
-                      <h4>
-                        <p className="category">Header 4</p>Light Bootstrap
-                        Table Heading
-                      </h4>
-                    </div>
-                    <div className="typo-line">
-                      <h5>
-                        <p className="category">Header 5</p>Light Bootstrap
-                        Table Heading
-                      </h5>
-                    </div>
-                    <div className="typo-line">
-                      <h6>
-                        <p className="category">Header 6</p>Light Bootstrap
-                        Table Heading
-                      </h6>
-                    </div>
-                    <div className="typo-line">
-                      <p>
-                        <span className="category">Paragraph</span>Lorem ipsum
-                        dolor sit amet, consectetuer adipiscing elit, sed diam
-                        nonummy nibh euismod tincidunt ut laoreet dolore magna
-                        aliquam erat volutpat. Ut wisi enim ad minim veniam.
-                      </p>
-                    </div>
-                    <div className="typo-line">
-                      <p className="category">Quote</p>
-                      <blockquote>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetuer adipiscing
-                          elit, sed diam nonummy nibh euismod tincidunt ut
-                          laoreet dolore magna aliquam erat volutpat. Ut wisi
-                          enim ad minim veniam.
-                        </p>
-                        <small>Steve Jobs, CEO Apple</small>
-                      </blockquote>
-                    </div>
-
-                    <div className="typo-line">
-                      <p className="category">Muted Text</p>
-                      <p className="text-muted">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit, sed diam nonummy nibh euismod tincidunt ut
-                        laoreet.
-                      </p>
-                    </div>
-                    <div className="typo-line">
-                      {/* <!--
-                                             there are also "text-info", "text-success", "text-warning", "text-danger" clases for the text
-                                             --> */}
-                      <p className="category">Coloured Text</p>
-                      <p className="text-primary">
-                        Text Primary - Light Bootstrap Table Heading and complex
-                        bootstrap dashboard you've ever seen on the internet.
-                      </p>
-                      <p className="text-info">
-                        Text Info - Light Bootstrap Table Heading and complex
-                        bootstrap dashboard you've ever seen on the internet.
-                      </p>
-                      <p className="text-success">
-                        Text Success - Light Bootstrap Table Heading and complex
-                        bootstrap dashboard you've ever seen on the internet.
-                      </p>
-                      <p className="text-warning">
-                        Text Warning - Light Bootstrap Table Heading and complex
-                        bootstrap dashboard you've ever seen on the internet.
-                      </p>
-                      <p className="text-danger">
-                        Text Danger - Light Bootstrap Table Heading and complex
-                        bootstrap dashboard you've ever seen on the internet.
-                      </p>
-                    </div>
-
-                    <div className="typo-line">
-                      <h2>
-                        <p className="category">Small Tag</p>Header with small
-                        subtitle <br />
-                        <small>".small" is a tag for the headers</small>{" "}
-                      </h2>
-                    </div>
-                  </div>
+            <Col md={12}>
+              <Card
+                plain
+                title="Striped Table with Hover"
+                category="Here is a subtitle for this table"
+                ctTableFullWidth
+                ctTableResponsive
+                content={
+                  <Table hover>
+                    <thead>
+                      <tr>
+                        {thArray.map((prop, key) => {
+                          return <th key={key}>{prop}</th>;
+                        })}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {tdArray.map((prop, key) => {
+                        return (
+                          <tr key={key}>
+                            {prop.map((prop, key) => {
+                              return <td key={key}>{prop}</td>;
+                            })}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
                 }
               />
             </Col>

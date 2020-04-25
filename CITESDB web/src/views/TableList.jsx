@@ -45,12 +45,17 @@ class TableList extends Component {
   }
 
   handleButton = event => {
+    console.log(this.props);
     alert('should be changed with communication with server: ' + this.state.value);
-    console.log(event.target.value);
+    // const w=window.open('about:blank');
+    // w.location.href="typography"
+    // console.log(event.target.value);
     event.preventDefault();
   };
 
   handleChange(event) {
+    console.log("on change");
+    console.log(event.target.value);
     this.setState({value: event.target.value});
   }
 
@@ -62,8 +67,8 @@ class TableList extends Component {
   
     return (
       <div className="content">
-        <form onSubmit={this.handleSubmit}>
-        <label>
+        {/* <form onSubmit={this.handleSubmit}> */}
+        {/* <label>
           Choose the country for query 
           <select value={this.state.value} onChange={this.handleChange}>
             <option value="gg">Google</option>
@@ -73,8 +78,8 @@ class TableList extends Component {
           </select>
 
         </label>
-        <input type="submit" value="submit" />
-      </form>  
+        <input type="submit" value="submit" /> */}
+      {/* </form>   */}
 
       
       <form onSubmit={this.handleButton}>
@@ -84,7 +89,7 @@ class TableList extends Component {
               <Card
                 title="Search with these restrictions: "
                 content={
-                  <form>
+                  <form onChange = {this.handleChange}>
                     <FormInputs
                       ncols={["col-md-5", "col-md-3", "col-md-4"]}
                       properties={[
@@ -110,6 +115,7 @@ class TableList extends Component {
                           defaultValue: "CN"
                         }
                       ]}
+
                     />
                     
                     <Button bsStyle="info" pullRight fill type="submit">
@@ -121,70 +127,7 @@ class TableList extends Component {
               />
             </Col>
           </Row>
-          <Row>
-            <Col md={12}>
-              <Card
-                title="Striped Table with Hover"
-                category="Here is a subtitle for this table"
-                ctTableFullWidth
-                ctTableResponsive
-                content={
-                  <Table striped hover>
-                    <thead>
-                      <tr>
-                        {thArray.map((prop, key) => {
-                          return <th key={key}>{prop}</th>;
-                        })}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {tdArray.map((prop, key) => {
-                        return (
-                          <tr key={key}>
-                            {prop.map((prop, key) => {
-                              return <td key={key}>{prop}</td>;
-                            })}
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                }
-              />
-            </Col>
-
-            <Col md={12}>
-              <Card
-                plain
-                title="Striped Table with Hover"
-                category="Here is a subtitle for this table"
-                ctTableFullWidth
-                ctTableResponsive
-                content={
-                  <Table hover>
-                    <thead>
-                      <tr>
-                        {thArray.map((prop, key) => {
-                          return <th key={key}>{prop}</th>;
-                        })}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {tdArray.map((prop, key) => {
-                        return (
-                          <tr key={key}>
-                            {prop.map((prop, key) => {
-                              return <td key={key}>{prop}</td>;
-                            })}
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                }
-              />
-            </Col>
-          </Row>
+          
         </Grid>
         </form>
       </div>

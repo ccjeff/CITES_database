@@ -18,13 +18,15 @@ const colorScale = scaleLinear()
   .domain([0.29, 0.68])
   .range(["#ffedea", "#ff5233"]);
 
+
+
 const MapChart = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     csv('/testCSV.csv').then(data => {
       setData(data);
-      console.log(data);
+      // console.log(data);
     });
   }, []);
 
