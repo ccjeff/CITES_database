@@ -29,23 +29,19 @@ import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
-import { subscribeToTimer, sendToServer } from './socket';
+import { subscribeToTimer, sendToServer, notifyServerFinished } from './socket';
 import avatar from "assets/img/faces/face-3.jpg";
 import { thArray, tdArray } from "variables/Variables.jsx";
-
+import axios from 'axios' ;
 
 class TableList extends Component {
   constructor(props) {
     super(props);
-    subscribeToTimer((err, timestamp) => this.setState({ 
-      timestamp 
-    }));
     
     this.state = {
-      country: 'CN',
-      year: '2020',
-      creature: 'elephant',
-      timestamp : 'no time yet'
+      country: '',
+      year: '',
+      creature: '',
     };
 
     this.handleButton = this.handleButton.bind(this);
@@ -58,16 +54,38 @@ class TableList extends Component {
   handleButton = event => {
     // console.log(this.props);
     // alert('should be changed with communication with server: ' + this.state.country + this.state.year + this.state.creature);
-    console.log("aa");
+    // console.log("aa");
     console.log(JSON.stringify(this.state));
-    var returnVal = this.state;
-    sendToServer(this.state);
+    // axios.post('https://127.0.0.1:5000/index', JSON.stringify(this.state))
+    //         .then(function(response){
+    //             console.log(response);
+    //    //Perform action based on response
+    //     })
+    //     .catch(function(error){
+    //         console.log(error);
+    //    //Perform action based on error
+    //     });
+    // // sendToServer(JSON.stringify(this.state));
+
     
 
     const w=window.open('about:blank');
     w.location.href="typography"
     // console.log(event.target.value);
     event.preventDefault();
+    return fetch( 'http://127.0.0.1:5000/index', {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, 
+    method: 'POST',
+    body: {
+      'country':'CN',
+      'creature' : 'human',
+      'year' : '2077'
+    }
+  });
+
   };
 
   handleChange1 = event => {
@@ -93,10 +111,7 @@ class TableList extends Component {
   
     return (
       <div className="content">
-        <p className="App-intro">
-        This is the timer value: {this.state.timestamp}
-        </p>
-
+      
       <form onSubmit={this.handleButton}>
         <Grid fluid>
         <Row>
@@ -113,8 +128,8 @@ class TableList extends Component {
                           label: "Year",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "2020",
-                          defaultValue: "2020",
+                          placeholder: "year",
+                          defaultValue: "",
                         }
                       ]}
                     />
@@ -135,8 +150,8 @@ class TableList extends Component {
                           label: "Creature Name",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "Elephant",
-                          defaultValue: "Elephant"
+                          placeholder: "creature",
+                          defaultValue: ""
                         }
                       ]}
 
@@ -159,8 +174,8 @@ class TableList extends Component {
                           label: "Country",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "CN",
-                          defaultValue: "CN"
+                          placeholder: "countryISO",
+                          defaultValue: ""
                         }
                       ]}
 

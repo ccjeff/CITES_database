@@ -39,40 +39,6 @@ import {
 } from "variables/Variables.jsx";
 
 
-var mydata;
-
-function csvJSON(csvpath){
-    d3.csv(csvpath).then(function(df) {
-        console.log(df); // [{"Hello": "world"}, …]
-        console.log(typeof(df));
-        console.log(df[0]);
-        console.log(df[0].ISO3);
-        //获得国家（动物名称）array
-        var species_arr = new Array();
-        for(let key in df){
-            // console.log(df[key].Name);
-            species_arr.push(df[key].Name);
-        }
-        console.log(species_arr);
-        var count_species = {}; // for counted species name
-        for(var i=0,v,l = species_arr.length; v = species_arr[i],i<l; i++)
-        {
-            var rv = /^([a-z]+)(?:.+?(\d+))?/i.exec(v);
-            if (!count_species[rv[1]])
-                count_species[rv[1]] = 0;
-            count_species[rv[1]] += rv[2] ? parseInt(rv[2], 10) : 1;
-        }
-        console.log(count_species);
-        return count_species;
-    });
-
-}
-
-mydata = csvJSON('/recorded_creature.csv');
-console.log("caonima");
-console.log(mydata);
-
-
 class Dashboard extends Component {
   createLegend(json) {
     var legend = [];

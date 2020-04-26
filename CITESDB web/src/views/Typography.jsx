@@ -22,10 +22,30 @@ import { thArray, tdArray } from "variables/Variables.jsx";
 
 import Card from "components/Card/Card.jsx";
 
+import { notifyServerFinished } from './socket';
+
+
+
 class Typography extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      val: 'a'
+    }
+    console.log("in constructor");
+    // notifyServerFinished(val => this.setState({
+    //   ['val'] : val
+    // })); 
+    
+  }
+
   render() {
     return (
       <div className="content">
+        <p className="App-intro">
+        This is the value: {this.state.val}
+        </p>
         <Grid fulid>
           <Row>
             <Col md={12}>
