@@ -22,7 +22,7 @@ import { thArray, tdArray } from "variables/Variables.jsx";
 
 import Card from "components/Card/Card.jsx";
 
-import { notifyServerFinished } from './socket';
+// import { notifyServerFinished } from './socket';
 
 
 

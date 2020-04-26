@@ -29,10 +29,17 @@ import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
-import { subscribeToTimer, sendToServer, notifyServerFinished } from './socket';
+// import { subscribeToTimer, sendToServer, notifyServerFinished } from './socket';
 import avatar from "assets/img/faces/face-3.jpg";
 import { thArray, tdArray } from "variables/Variables.jsx";
 import axios from 'axios' ;
+
+function redirect(){
+  const w=window.open('localhost:3000/admin/typography');
+  // w.location.href="typography";
+}
+
+
 
 class TableList extends Component {
   constructor(props) {
@@ -44,6 +51,7 @@ class TableList extends Component {
       creature: '',
     };
 
+
     this.handleButton = this.handleButton.bind(this);
     this.handleChange1 = this.handleChange1.bind(this);
     this.handleChange2 = this.handleChange2.bind(this);
@@ -51,10 +59,16 @@ class TableList extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
   handleButton = event => {
     // console.log(this.props);
     // alert('should be changed with communication with server: ' + this.state.country + this.state.year + this.state.creature);
     // console.log("aa");
+    var config = { headers: {  
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'}
+    }
+
     console.log(JSON.stringify(this.state));
     // axios.post('https://127.0.0.1:5000/index', JSON.stringify(this.state))
     //         .then(function(response){
@@ -65,27 +79,22 @@ class TableList extends Component {
     //         console.log(error);
     //    //Perform action based on error
     //     });
-    // // sendToServer(JSON.stringify(this.state));
-
-    
-
-    const w=window.open('about:blank');
-    w.location.href="typography"
+    // sendToServer(JSON.stringify(this.state));
     // console.log(event.target.value);
     event.preventDefault();
-    return fetch( 'http://127.0.0.1:5000/index', {
+    var returnSignal = '';
+    returnSignal = fetch( 'http://127.0.0.1:5000/index', {
     headers: {
-      'Accept': 'application/json',
+      'Accept': 'application/json, text/plain, */*',
       'Content-Type': 'application/json'
-    }, 
+    },
     method: 'POST',
-    body: {
-      'country':'CN',
-      'creature' : 'human',
-      'year' : '2077'
-    }
+    body: JSON.stringify(this.state)
+  }).then(()=>{
+    redirect();
   });
 
+  console.log("return signal here is", returnSignal);
   };
 
   handleChange1 = event => {
@@ -195,6 +204,9 @@ class TableList extends Component {
           </Button>
         </Grid>
         </form>
+      
+      
+      
       </div>
     );
   }
